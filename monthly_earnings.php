@@ -15,14 +15,25 @@ $selectedYear = isset($_GET['year']) ? intval($_GET['year']) : date('Y');
 $selectedEmployeeId = isset($_GET['employee_id']) ? intval($_GET['employee_id']) : null;
 
 // Query to get all employees for the dropdown
-$employeeQuery = "SELECT id, first_name, last_name FROM employees";
+$employeeQuery = "SELECT id, first_name, last_name, profile_image FROM employees";
 $employeeResult = $conn->query($employeeQuery);
 
 // Initialize empty earnings data
 $monthlyEarnings = [];
+$employeeImage = null;
+$employeeName = null;
 
 // Only query if an employee is selected
 if ($selectedEmployeeId) {
+    // Get selected employee's profile image and name
+    $employeeDetailsQuery = "SELECT first_name, last_name, profile_image FROM employees WHERE id = $selectedEmployeeId";
+    $employeeDetailsResult = $conn->query($employeeDetailsQuery);
+    if ($employeeDetailsResult->num_rows > 0) {
+        $employeeDetails = $employeeDetailsResult->fetch_assoc();
+        $employeeName = htmlspecialchars($employeeDetails['first_name'] . " " . $employeeDetails['last_name']);
+        $employeeImage = $employeeDetails['profile_image']; // Assuming this is the path to the image
+    }
+
     // Query to get the selected employee's earnings for the selected year
     $sql = "SELECT MONTH(t.transaction_date) AS month, 
                    SUM(t.amount) AS total_earnings
@@ -63,6 +74,15 @@ if ($selectedEmployeeId) {
             padding: 10px;
             text-align: left;
         }
+        .employee-profile {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .employee-profile img {
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+        }
     </style>
 </head>
 <body>
@@ -78,8 +98,8 @@ if ($selectedEmployeeId) {
             if ($employeeResult->num_rows > 0) {
                 while ($employeeRow = $employeeResult->fetch_assoc()) {
                     $employeeId = $employeeRow['id'];
-                    $employeeName = htmlspecialchars($employeeRow['first_name'] . " " . $employeeRow['last_name']);
-                    echo "<option value=\"$employeeId\"" . ($employeeId == $selectedEmployeeId ? " selected" : "") . ">$employeeName</option>";
+                    $employeeNameDropdown = htmlspecialchars($employeeRow['first_name'] . " " . $employeeRow['last_name']);
+                    echo "<option value=\"$employeeId\"" . ($employeeId == $selectedEmployeeId ? " selected" : "") . ">$employeeNameDropdown</option>";
                 }
             }
             ?>
@@ -96,6 +116,14 @@ if ($selectedEmployeeId) {
         </select>
         <input type="submit" value="Filter">
     </form>
+
+    <!-- Display Employee Profile Image and Name -->
+    <?php if ($selectedEmployeeId && $employeeImage): ?>
+        <div class="employee-profile">
+            <img src="<?php echo htmlspecialchars($employeeImage); ?>" alt="Profile Image of <?php echo htmlspecialchars($employeeName); ?>">
+            <h3><?php echo htmlspecialchars($employeeName); ?></h3>
+        </div>
+    <?php endif; ?>
 
     <!-- Display Earnings Table -->
     <?php if ($selectedEmployeeId): ?>
