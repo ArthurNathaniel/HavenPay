@@ -62,127 +62,60 @@ if ($selectedEmployeeId) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Employee Weekly Earnings</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            padding: 0;
-            background-color: #f4f4f9;
-        }
-
-        h2 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        form {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        label, select, input[type="submit"] {
-            font-size: 16px;
-            padding: 5px 10px;
-            margin: 5px;
-        }
-
-        table {
-            width: 100%;
-            max-width: 800px;
-            margin: 0 auto;
-            border-collapse: collapse;
-            background-color: white;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        table, th, td {
-            border: 1px solid #ccc;
-        }
-
-        th, td {
-            padding: 15px;
-            text-align: center;
-        }
-
-        th {
-            background-color: #007bff;
-            color: white;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        tr.highlight {
-            background-color: #ffdd57;
-            font-weight: bold;
-        }
-
-        .employee-profile {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .employee-profile img {
-            border-radius: 50%;
-            width: 150px;
-            height: 150px;
-            object-fit: cover;
-            border: 4px solid #007bff;
-        }
-
-        @media (max-width: 600px) {
-            table, th, td {
-                font-size: 12px;
-                padding: 10px;
-            }
-
-            .employee-profile img {
-                width: 100px;
-                height: 100px;
-            }
-        }
-    </style>
+    <?php include './cdn.php' ?>
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/earnings.css">
 </head>
 <body>
-    <h2>Employee Weekly Earnings for <?php echo $selectedYear; ?></h2>
+<?php include './sidebar.php' ?>
+    <div class="earnings_all">
+   <div class="forms_title">
+   <h2>Employee Weekly Earnings for <?php echo $selectedYear; ?></h2>
+   </div>
 
-    <!-- Employee and Year Filter Form -->
-    <form method="GET" action="">
-        <label for="employee">Select Employee: </label>
-        <select name="employee_id" id="employee" required>
-            <option value="">-- Select Employee --</option>
-            <?php
-            // Populate employee dropdown options
-            if ($employeeResult->num_rows > 0) {
-                while ($employeeRow = $employeeResult->fetch_assoc()) {
-                    $employeeId = $employeeRow['id'];
-                    $employeeNameDropdown = htmlspecialchars($employeeRow['first_name'] . " " . $employeeRow['last_name']);
-                    echo "<option value=\"$employeeId\"" . ($employeeId == $selectedEmployeeId ? " selected" : "") . ">$employeeNameDropdown</option>";
-                }
+<!-- Employee and Year Filter Form -->
+<form method="GET" action="">
+<div class="forms">
+<label for="employee">Select Employee: </label>
+    <select name="employee_id" id="employee" required>
+        <option value="">-- Select Employee --</option>
+        <?php
+        // Populate employee dropdown options
+        if ($employeeResult->num_rows > 0) {
+            while ($employeeRow = $employeeResult->fetch_assoc()) {
+                $employeeId = $employeeRow['id'];
+                $employeeNameDropdown = htmlspecialchars($employeeRow['first_name'] . " " . $employeeRow['last_name']);
+                echo "<option value=\"$employeeId\"" . ($employeeId == $selectedEmployeeId ? " selected" : "") . ">$employeeNameDropdown</option>";
             }
-            ?>
-        </select>
+        }
+        ?>
+    </select>
+</div>
 
-        <label for="year">Select Year: </label>
-        <select name="year" id="year">
-            <?php
-            $currentYear = date('Y');
-            for ($year = $currentYear; $year >= 2000; $year--) {
-                echo "<option value=\"$year\"" . ($year == $selectedYear ? " selected" : "") . ">$year</option>";
-            }
-            ?>
-        </select>
-        <input type="submit" value="Filter">
-    </form>
+    <div class="forms">
+    <label for="year">Select Year: </label>
+    <select name="year" id="year">
+        <?php
+        $currentYear = date('Y');
+        for ($year = $currentYear; $year >= 2000; $year--) {
+            echo "<option value=\"$year\"" . ($year == $selectedYear ? " selected" : "") . ">$year</option>";
+        }
+        ?>
+    </select>
+    </div>
+   <div class="forms">
+   <!-- <input type="submit" value="Filter"> -->
+   <button type="submit">Filter</button>
+   </div>
+</form>
 
-    <!-- Display Employee Profile Image and Name -->
-    <?php if ($selectedEmployeeId && $employeeImage): ?>
-        <div class="employee-profile">
-            <img src="<?php echo htmlspecialchars($employeeImage); ?>" alt="Profile Image of <?php echo htmlspecialchars($employeeName); ?>">
-            <h3><?php echo htmlspecialchars($employeeName); ?></h3>
-        </div>
-    <?php endif; ?>
+<!-- Display Employee Profile Image and Name -->
+<?php if ($selectedEmployeeId && $employeeImage): ?>
+    <div class="employee-profile">
+        <img src="<?php echo htmlspecialchars($employeeImage); ?>" alt="Profile Image of <?php echo htmlspecialchars($employeeName); ?>">
+        <h3><?php echo htmlspecialchars($employeeName); ?></h3>
+    </div>
+<?php endif; ?>
 
 <!-- Display Earnings Table -->
 <!-- Display Earnings Table -->
@@ -191,36 +124,37 @@ if ($selectedEmployeeId) {
 $currentWeekNumber = date('W');
 
 if ($selectedEmployeeId): ?>
-    <table>
-        <thead>
-            <tr>
-                <th>Week Number</th>
-                <th>Earnings</th>
-                <th>5% Commission</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            // Display earnings and commission for each week (52 to 1), starting with the current week at the top
-            for ($week = 52; $week >= 1; $week--) {
-                $earnings = isset($weeklyEarnings[$week]) ? number_format($weeklyEarnings[$week]['earnings'], 2) : '0.00';
-                $commission = isset($weeklyEarnings[$week]) ? number_format($weeklyEarnings[$week]['commission'], 2) : '0.00';
+<table>
+    <thead>
+        <tr>
+            <th>Week Number</th>
+            <th>Earnings</th>
+            <th>5% Commission</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+        // Display earnings and commission for each week (52 to 1), starting with the current week at the top
+        for ($week = 52; $week >= 1; $week--) {
+            $earnings = isset($weeklyEarnings[$week]) ? number_format($weeklyEarnings[$week]['earnings'], 2) : '0.00';
+            $commission = isset($weeklyEarnings[$week]) ? number_format($weeklyEarnings[$week]['commission'], 2) : '0.00';
 
-                // Check if it's the current week and add a red background
-                $rowStyle = ($week == $currentWeekNumber) ? 'style="background-color: red;"' : '';
+            // Check if it's the current week and add a red background
+            $rowStyle = ($week == $currentWeekNumber) ? 'style="background-color: red;"' : '';
 
-                echo "<tr $rowStyle>";
-                echo "<td>Week $week</td>";
-                echo "<td>$earnings</td>";
-                echo "<td>$commission</td>";
-                echo "</tr>";
-            }
-            ?>
-        </tbody>
-    </table>
+            echo "<tr $rowStyle>";
+            echo "<td>Week $week</td>";
+            echo "<td>$earnings</td>";
+            echo "<td>$commission</td>";
+            echo "</tr>";
+        }
+        ?>
+    </tbody>
+</table>
 <?php else: ?>
-    <p>Please select an employee to view their weekly earnings.</p>
+<p>Please select an employee to view their weekly earnings.</p>
 <?php endif; ?>
+    </div>
 
 
 </body>

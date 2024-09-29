@@ -26,20 +26,7 @@ $result = $conn->query($sql);
     <?php include './cdn.php' ?>
     <link rel="stylesheet" href="./css/base.css">
     <link rel="stylesheet" href="./css/view_transaction_all.css">
-    <style>
-        .search-container {
-            margin-bottom: 20px;
-        }
-        .search-container input {
-            padding: 10px;
-            font-size: 16px;
-            width: 300px;
-        }
-        .search-container button {
-            padding: 10px 20px;
-            font-size: 16px;
-        }
-    </style>
+   
 </head>
 
 <body>

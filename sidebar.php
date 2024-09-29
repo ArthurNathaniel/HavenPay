@@ -21,7 +21,8 @@ $current_page = basename($_SERVER['PHP_SELF']); // Get the current page name
 
         <a href="view_transactions.php" class="<?= $current_page === 'view_transactions.php' ? 'active' : '' ?>">Recorded Transactions
         </a>
-
+        <a href="weekly_earnings.php" class="<?= $current_page === 'weekly_earnings.php' ? 'active' : '' ?>"> Weekly Earnings
+        </a>
         
     </div>
 </div>
