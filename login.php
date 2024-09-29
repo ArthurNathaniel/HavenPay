@@ -30,17 +30,37 @@ if (isset($_POST['login'])) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/login.css">
 </head>
+
 <body>
-    <h2>Login</h2>
-    <form method="POST" action="login.php">
-        <input type="text" name="username" placeholder="Username" required><br><br>
-        <input type="password" name="password" placeholder="Password" required><br><br>
-        <button type="submit" name="login">Login</button>
-    </form>
+    <div class="login_all">
+    <div class="login_box">
+        <div class="logo"></div>
+        <div class="forms_title">
+            <h2>HavenPay - Login</h2>
+        </div>
+        <form method="POST" action="login.php">
+            <div class="forms">
+                <label>Username</label>
+                <input type="text" name="username" placeholder="Enter your username" required>
+            </div>
+            <div class="forms">
+                <label>Password</label>
+                <input type="password" name="password" placeholder="Enter your  password" required>
+            </div>
+            <div class="forms">
+                <button type="submit" name="login">Login</button>
+            </div>
+        </form>
+    </div>
+    </div>
 </body>
+
 </html>
