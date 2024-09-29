@@ -129,7 +129,7 @@ if ($selectedEmployeeId): ?>
         <tr>
             <th>Week Number</th>
             <th>Earnings</th>
-            <th>5% Commission</th>
+            <th>Wages</th>
         </tr>
     </thead>
     <tbody>

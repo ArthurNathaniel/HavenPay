@@ -37,7 +37,7 @@ tr.highlight {
     width: 150px;
     height: 150px;
     object-fit: cover;
-    border: 4px solid #007bff;
+    border: 4px solid #333;
 }
 
 @media (max-width: 600px) {

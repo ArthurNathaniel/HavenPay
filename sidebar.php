@@ -23,7 +23,8 @@ $current_page = basename($_SERVER['PHP_SELF']); // Get the current page name
         </a>
         <a href="weekly_earnings.php" class="<?= $current_page === 'weekly_earnings.php' ? 'active' : '' ?>"> Weekly Earnings
         </a>
-        
+        <a href="monthly_earnings.php" class="<?= $current_page === 'monthly_earnings.php' ? 'active' : '' ?>"> Monthly Earnings
+        </a>
     </div>
 </div>
 

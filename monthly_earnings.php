@@ -62,7 +62,10 @@ if ($selectedEmployeeId) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Employee Monthly Earnings</title>
-    <style>
+    <?php include './cdn.php' ?>
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/earnings.css">
+    <!-- <style>
         table {
             width: 100%;
             border-collapse: collapse;
@@ -83,14 +86,18 @@ if ($selectedEmployeeId) {
             width: 150px;
             height: 150px;
         }
-    </style>
+    </style> -->
 </head>
 <body>
+<?php include './sidebar.php' ?>
+    <div class="earnings_all">
+   <div class="forms_title">
     <h2>Employee Monthly Earnings for <?php echo $selectedYear; ?></h2>
-
+   </div>
     <!-- Employee and Year Filter Form -->
     <form method="GET" action="">
-        <label for="employee">Select Employee: </label>
+  <div class="forms">
+  <label for="employee">Select Employee: </label>
         <select name="employee_id" id="employee" required>
             <option value="">-- Select Employee --</option>
             <?php
@@ -104,8 +111,10 @@ if ($selectedEmployeeId) {
             }
             ?>
         </select>
-
-        <label for="year">Select Year: </label>
+  </div>
+<div class="forms">
+    
+<label for="year">Select Year: </label>
         <select name="year" id="year">
             <?php
             $currentYear = date('Y');
@@ -113,8 +122,13 @@ if ($selectedEmployeeId) {
                 echo "<option value=\"$year\"" . ($year == $selectedYear ? " selected" : "") . ">$year</option>";
             }
             ?>
-        </select>
-        <input type="submit" value="Filter">
+            </select>
+</div>
+        
+      <div class="forms">
+      <!-- <input type="submit" value="Filter"> -->
+      <button type="submit">Filter</button>
+      </div>
     </form>
 
     <!-- Display Employee Profile Image and Name -->
@@ -132,7 +146,7 @@ if ($selectedEmployeeId) {
                 <tr>
                     <th>Month</th>
                     <th>Earnings</th>
-                    <th>5% Commission</th>
+                    <th>Salary</th>
                 </tr>
             </thead>
             <tbody>
@@ -154,5 +168,6 @@ if ($selectedEmployeeId) {
     <?php else: ?>
         <p>Please select an employee to view their earnings.</p>
     <?php endif; ?>
+    </div>
 </body>
 </html>
