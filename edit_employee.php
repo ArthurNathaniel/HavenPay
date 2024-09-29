@@ -94,40 +94,96 @@ if (isset($_POST['update'])) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Employee</title>
+    <?php include './cdn.php' ?>
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/add_employee.css">
 </head>
+
 <body>
-    <h2>Edit Employee</h2>
-    <form method="POST" action="edit_employee.php?id=<?php echo $employee['id']; ?>" enctype="multipart/form-data">
-        <input type="text" name="first_name" placeholder="First Name" value="<?php echo htmlspecialchars($employee['first_name']); ?>" required><br><br>
-        <input type="text" name="middle_name" placeholder="Middle Name" value="<?php echo htmlspecialchars($employee['middle_name']); ?>"><br><br>
-        <input type="text" name="last_name" placeholder="Last Name" value="<?php echo htmlspecialchars($employee['last_name']); ?>" required><br><br>
-        <input type="date" name="dob" value="<?php echo htmlspecialchars($employee['dob']); ?>" required><br><br>
-        <input type="text" name="phone_number" placeholder="Phone Number" value="<?php echo htmlspecialchars($employee['phone_number']); ?>" required><br><br>
-        <input type="text" name="house_number" placeholder="House Number" value="<?php echo htmlspecialchars($employee['house_number']); ?>" required><br><br>
-        <input type="text" name="emergency_contact_name" placeholder="Emergency Contact Name" value="<?php echo htmlspecialchars($employee['emergency_contact_name']); ?>" required><br><br>
-        <input type="text" name="emergency_contact_number" placeholder="Emergency Contact Number" value="<?php echo htmlspecialchars($employee['emergency_contact_number']); ?>" required><br><br>
-        
-        <label for="emergency_relationship">Emergency Relationship:</label>
-        <select name="emergency_relationship" id="emergency_relationship" required>
-            <option value="Parent" <?php if ($employee['emergency_relationship'] == 'Parent') echo 'selected'; ?>>Parent</option>
-            <option value="Friend" <?php if ($employee['emergency_relationship'] == 'Friend') echo 'selected'; ?>>Friend</option>
-            <option value="Family" <?php if ($employee['emergency_relationship'] == 'Family') echo 'selected'; ?>>Family</option>
-            <option value="Guardian" <?php if ($employee['emergency_relationship'] == 'Guardian') echo 'selected'; ?>>Guardian</option>
-        </select><br><br>
+    <?php include './sidebar.php' ?>
+    <div class="add_employee_all">
+        <div class="forms_title">
+            <h2>Edit Employee</h2>
+        </div>
+        <form method="POST" action="edit_employee.php?id=<?php echo $employee['id']; ?>" enctype="multipart/form-data">
+            <div class="forms">
+            <label>Profile Image:</label>
+                <input type="file" name="profile_image" accept="image/*">
+                <img src="<?php echo $employee['profile_image']; ?>" alt="Profile Image" width="100" height="100">
+            </div>
+         <div class="forms_groups">
+         <div class="forms">
+            <label>First Name:</label>
+                <input type="text" name="first_name" placeholder="First Name" value="<?php echo htmlspecialchars($employee['first_name']); ?>" required>
 
-        <label for="gender">Gender:</label>
-        <select name="gender" id="gender" required>
-            <option value="Male" <?php if ($employee['gender'] == 'Male') echo 'selected'; ?>>Male</option>
-            <option value="Female" <?php if ($employee['gender'] == 'Female') echo 'selected'; ?>>Female</option>
-        </select><br><br>
+            </div>
+          
+            <div class="forms">
+            <label>Middle Name:</label>
+                <input type="text" name="middle_name" placeholder="Middle Name" value="<?php echo htmlspecialchars($employee['middle_name']); ?>">
+            </div>
 
-        <img src="<?php echo $employee['profile_image']; ?>" alt="Profile Image" width="100" height="100"><br><br>
-        <input type="file" name="profile_image" accept="image/*"><br><br>
-        <button type="submit" name="update">Update Employee</button>
-    </form>
+            <div class="forms">
+            <label>Last Name:</label>
+                <input type="text" name="last_name" placeholder="Last Name" value="<?php echo htmlspecialchars($employee['last_name']); ?>" required>
+            </div>
+         </div>
+            <div class="forms_groups">
+            <div class="forms">
+                <label for="gender">Gender:</label>
+                <select name="gender" id="gender" required>
+                    <option value="Male" <?php if ($employee['gender'] == 'Male') echo 'selected'; ?>>Male</option>
+                    <option value="Female" <?php if ($employee['gender'] == 'Female') echo 'selected'; ?>>Female</option>
+                </select>
+            </div>
+            <div class="forms">
+            <label>Date of Birth:</label>
+                <input type="date" name="dob" value="<?php echo htmlspecialchars($employee['dob']); ?>" required>
+            </div>
+
+            <div class="forms">
+            <label>Phone Number:</label>
+                <input type="text" name="phone_number" placeholder="Phone Number" value="<?php echo htmlspecialchars($employee['phone_number']); ?>" required>
+            </div>
+            </div>
+            <div class="forms">
+            <label>House Number:</label>
+                <input type="text" name="house_number" placeholder="House Number" value="<?php echo htmlspecialchars($employee['house_number']); ?>" required>
+            </div>
+
+           <div class="forms_groups">
+           <div class="forms">
+            <label>Emergency Contact Name:</label>
+                <input type="text" name="emergency_contact_name" placeholder="Emergency Contact Name" value="<?php echo htmlspecialchars($employee['emergency_contact_name']); ?>" required>
+            </div>
+
+            <div class="forms">
+            <label>Emergency Contact Number:</label>
+                <input type="text" name="emergency_contact_number" placeholder="Emergency Contact Number" value="<?php echo htmlspecialchars($employee['emergency_contact_number']); ?>" required>
+            </div>
+            <div class="forms">
+                <label for="emergency_relationship">Emergency Relationship:</label>
+                <select name="emergency_relationship" id="emergency_relationship" required>
+                    <option value="Parent" <?php if ($employee['emergency_relationship'] == 'Parent') echo 'selected'; ?>>Parent</option>
+                    <option value="Friend" <?php if ($employee['emergency_relationship'] == 'Friend') echo 'selected'; ?>>Friend</option>
+                    <option value="Family" <?php if ($employee['emergency_relationship'] == 'Family') echo 'selected'; ?>>Family</option>
+                    <option value="Guardian" <?php if ($employee['emergency_relationship'] == 'Guardian') echo 'selected'; ?>>Guardian</option>
+                </select>
+            </div>
+           </div>
+
+          
+
+            <div class="forms">
+                <button type="submit" name="update">Update Employee</button>
+            </div>
+        </form>
+    </div>
 </body>
+
 </html>
