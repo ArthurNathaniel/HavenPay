@@ -1,0 +1,12 @@
+.record_tramsaction_all{
+    padding: 0 30%;
+    margin-block: 50px;
+}
+
+@media only screen and (max-width: 778px) {
+    .record_tramsaction_all{
+        padding: 0 10%;
+        margin-block: 50px;
+    }
+   
+}

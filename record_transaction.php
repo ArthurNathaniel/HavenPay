@@ -33,41 +33,64 @@ if (isset($_POST['record_transaction'])) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Record Transaction</title>
+    <?php include './cdn.php' ?>
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/record_tramsaction.css">
 </head>
+
 <body>
-    <h2>Record Transaction</h2>
-    <form method="POST" action="record_transaction.php">
-        <label for="transaction_date">Date:</label>
-        <input type="date" name="transaction_date" id="transaction_date" required><br><br>
+<?php include './sidebar.php' ?>
+    <div class="record_tramsaction_all">
+        <div class="forms_title">
+            <h2>Record Transaction</h2>
+        </div>
+        <form method="POST" action="record_transaction.php">
+            <div class="forms">
+                <label for="transaction_date">Date:</label>
+                <input type="date" name="transaction_date" id="transaction_date" required>
+            </div>
 
-        <label for="employee_id">Select Employee:</label>
-        <select name="employee_id" id="employee_id" required>
-            <option value="">Select an employee</option>
-            <?php
-            if ($result->num_rows > 0) {
-                while($row = $result->fetch_assoc()) {
-                    echo "<option value='" . $row['id'] . "'>" . htmlspecialchars($row['first_name'] . " " . $row['last_name']) . "</option>";
-                }
-            } else {
-                echo "<option value=''>No employees found</option>";
-            }
-            ?>
-        </select><br><br>
+            <div class="forms">
+                <label for="employee_id">Select Employee:</label>
+                <select name="employee_id" id="employee_id" required>
+                    <option value="">Select an employee</option>
+                    <?php
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            echo "<option value='" . $row['id'] . "'>" . htmlspecialchars($row['first_name'] . " " . $row['last_name']) . "</option>";
+                        }
+                    } else {
+                        echo "<option value=''>No employees found</option>";
+                    }
+                    ?>
+                </select>
+            </div>
 
-        <label for="service">Service:</label>
-        <input type="text" name="service" id="service" placeholder="Enter service" required><br><br>
+            <div class="forms">
+                <label for="service">Service:</label>
+                <input type="text" name="service" id="service" placeholder="Enter service" required>
+            </div>
 
-        <label for="client_name">Client Name:</label>
-        <input type="text" name="client_name" id="client_name" placeholder="Enter client name" required><br><br>
+            <div class="forms">
+                <label for="client_name">Client Name:</label>
+                <input type="text" name="client_name" id="client_name" placeholder="Enter client name" required>
+            </div>
 
-        <label for="amount">Amount:</label>
-        <input type="number" name="amount" id="amount" placeholder="Enter amount" step="0.01" required><br><br>
+            <div class="forms">
+                <label for="amount">Amount:</label>
+                <input type="number" name="amount" id="amount" placeholder="Enter amount" step="0.01" required>
+            </div>
 
-        <button type="submit" name="record_transaction">Record Transaction</button>
-    </form>
+            <div class="forms">
+                <button type="submit" name="record_transaction">Record Transaction</button>
+            </div>
+        </form>
+    </div>
 </body>
+
 </html>

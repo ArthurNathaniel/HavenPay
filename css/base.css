@@ -153,3 +153,8 @@ select:focus {
   background-color: #333;
   color: #fff;
 }
+
+.dashed{
+    border-top: 2px dashed #dad9da;
+    margin-top: 30px;
+}
