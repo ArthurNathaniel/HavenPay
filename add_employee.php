@@ -71,39 +71,96 @@ if (isset($_POST['register'])) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Employee</title>
+    <?php include './cdn.php' ?>
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/add_employee.css">
 </head>
-<body>
-    <h2>Add Employee</h2>
-    <form method="POST" action="add_employee.php" enctype="multipart/form-data">
-        <input type="text" name="first_name" placeholder="First Name" required><br><br>
-        <input type="text" name="middle_name" placeholder="Middle Name"><br><br>
-        <input type="text" name="last_name" placeholder="Last Name" required><br><br>
-        <input type="date" name="dob" placeholder="Date of Birth" required><br><br>
-        <input type="text" name="phone_number" placeholder="Phone Number" required><br><br>
-        <input type="text" name="house_number" placeholder="House Number" required><br><br>
-        <input type="text" name="emergency_contact_name" placeholder="Emergency Contact Name" required><br><br>
-        <input type="text" name="emergency_contact_number" placeholder="Emergency Contact Number" required><br><br>
-        
-        <label for="emergency_relationship">Emergency Relationship:</label>
-        <select name="emergency_relationship" id="emergency_relationship" required>
-            <option value="Parent">Parent</option>
-            <option value="Friend">Friend</option>
-            <option value="Family">Family</option>
-            <option value="Guardian">Guardian</option>
-        </select><br><br>
 
-        <label for="gender">Gender:</label>
-        <select name="gender" id="gender" required>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-        </select><br><br>
-        
-        <input type="file" name="profile_image" accept="image/*" required><br><br>
-        <button type="submit" name="register">Register Employee</button>
-    </form>
+<body>
+    <?php include './sidebar.php' ?>
+    <div class="add_employee_all">
+        <div class="forms_title">
+            <h2>Add Employee</h2>
+        </div>
+        <form method="POST" action="add_employee.php" enctype="multipart/form-data">
+            <div class="forms">
+                <label for="profile_image">Profile Image:</label>
+                <input type="file" name="profile_image" accept="image/*" required>
+            </div>
+            <div class="forms_groups">
+                <div class="forms">
+                    <label for="first_name">First Name:</label>
+                    <input type="text" name="first_name" placeholder="Enter your first name" required>
+                </div>
+                <div class="forms">
+                    <label for="middle_name">Middle Name:</label>
+                    <input type="text" name="middle_name" placeholder="Enter your middle name">
+                </div>
+                <div class="forms">
+                    <label for="last_name">Last Name:</label>
+                    <input type="text" name="last_name" placeholder="Enter your last name" required>
+                </div>
+            </div>
+            <div class="forms_groups">
+                <div class="forms">
+                    <label for="gender">Gender:</label>
+                    <select name="gender" id="gender" required>
+                        <option value="" selected hidden>Select Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </div>
+                <div class="forms">
+                    <label for="dob">Date of Birth:</label>
+                    <input type="date" name="dob" placeholder="Enter your date of birth" required>
+                </div>
+                <div class="forms">
+                    <label for="phone_number">Phone Number:</label>
+                    <input type="text" name="phone_number" placeholder="Enter your phone number" required>
+                </div>
+
+            </div>
+
+                <div class="forms">
+                    <label for="house_number">House Number:</label>
+                    <input type="text" name="house_number" placeholder="Enter your house number" required>
+                </div>
+
+            <div class="forms_groups">
+                <div class="forms">
+                    <label for="emergency_contact_name">Emergency Contact Name:</label>
+                    <input type="text" name="emergency_contact_name" placeholder="Enter your emergency contact name" required>
+                </div>
+                <div class="forms">
+                    <label for="emergency_contact_number">Emergency Contact Number:</label>
+                    <input type="text" name="emergency_contact_number" placeholder="Enter your emergency contact number" required>
+                </div>
+
+                <div class="forms">
+                    <label for="emergency_relationship">Emergency Relationship:</label>
+                    <select name="emergency_relationship" id="emergency_relationship" required>
+                    <option value="" selected hidden>Select Emergency Relationship</option>
+                        <option value="Parent">Parent</option>
+                        <option value="Friend">Friend</option>
+                        <option value="Family">Family</option>
+                        <option value="Guardian">Guardian</option>
+                    </select>
+                </div>
+
+            </div>
+
+
+
+            <div class="forms">
+                <button type="submit" name="register">Register Employee</button>
+            </div>
+        </form>
+    </div>
 </body>
+
 </html>

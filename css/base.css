@@ -1,15 +1,15 @@
-@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   text-decoration: none;
-  font-family: "Rubik", sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 body {
-  font-family: "Rubik", sans-serif;
+  font-family: "Inter", sans-serif;
+
   font-weight: 400;
   font-style: normal;
   background-color: #f4f5ff;
@@ -20,7 +20,6 @@ body {
   display: flex;
   flex-direction: column;
   margin-bottom: 30px;
-  position: relative;
 }
 
 .forms input {
@@ -80,7 +79,6 @@ select:focus {
   background-position: center;
   margin: 0 auto;
   padding-bottom: 20px;
- 
 }
 
 .mobile a {
@@ -109,7 +107,6 @@ select:focus {
 
 .mobile {
   display: none;
-
 }
 
 .mobile {
@@ -134,17 +131,16 @@ select:focus {
   padding-block: 20px;
 }
 
-
 .logout {
   position: fixed;
- top: 0;
- right: 0;
- padding: 10px;
+  top: 0;
+  right: 0;
+  padding: 10px;
   height: 45px;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #fc5185;
+  background-color: #c8af66;
   border: none;
 }
 
@@ -154,7 +150,6 @@ select:focus {
 }
 
 .navbar_all .mobile a.active {
-background-color: #333;
-color: #FFF;
-
+  background-color: #333;
+  color: #fff;
 }

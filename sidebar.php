@@ -12,7 +12,9 @@ $current_page = basename($_SERVER['PHP_SELF']); // Get the current page name
     <div class="mobile">
         <div class="logo"></div>
         <a href="dashboard.php" class="<?= $current_page === 'dashboard.php' ? 'active' : '' ?>">Dashboard</a>
-        
+        <a href="add_employee.php" class="<?= $current_page === 'add_employee.php' ? 'active' : '' ?>">Add Employee</a>
+
+        <a href="view_employees.php" class="<?= $current_page === 'view_employees.php' ? 'active' : '' ?>">View Employees</a>
 
 
         

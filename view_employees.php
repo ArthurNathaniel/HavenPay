@@ -19,60 +19,17 @@ $result = $conn->query($sql);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Employees</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        .modal {
-            display: none; 
-            position: fixed; 
-            z-index: 1; 
-            left: 0;
-            top: 0;
-            width: 100%; 
-            height: 100%; 
-            overflow: auto; 
-            background-color: rgba(0, 0, 0, 0.5); 
-            padding-top: 60px; 
-        }
-        .modal-content {
-            background-color: #fefefe;
-            margin: 15% auto; 
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-            max-width: 600px;
-            position: relative;
-        }
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
-    </style>
+    <?php include './cdn.php' ?>
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/view_employees.css">
+  
 </head>
 <body>
-    <h2>Employee List</h2>
+<?php include './sidebar.php' ?>
+    <div class="view_employees_all">
+  <div class="forms">
+  <h2>Employee List</h2>
+  </div>
     <table>
         <thead>
             <tr>
@@ -90,10 +47,10 @@ $result = $conn->query($sql);
                     echo "<td><img src='" . $row['profile_image'] . "' alt='Profile Image' width='50' height='50'></td>";
                     echo "<td>" . htmlspecialchars($row['first_name']) . "</td>";
                     echo "<td>" . htmlspecialchars($row['gender']) . "</td>";
-                    echo "<td>
-                            <button onclick='viewDetails(" . json_encode($row) . ")'>View</button>
-                            <a href='edit_employee.php?id=" . $row['id'] . "'>Edit</a>
-                            <a href='delete_employee.php?id=" . $row['id'] . "' onclick=\"return confirm('Are you sure you want to delete this employee?');\">Delete</a>
+                    echo "<td class='actions_btn'>
+                            <button onclick='viewDetails(" . json_encode($row) . ")'><i class='fa-solid fa-eye'></i></button>
+                            <a href='edit_employee.php?id=" . $row['id'] . "'><i class='fa-solid fa-user-pen'></i></a>
+                            <a href='delete_employee.php?id=" . $row['id'] . "' onclick=\"return confirm('Are you sure you want to delete this employee?');\"><i class='fa-solid fa-trash'></i></a>
                           </td>";
                     echo "</tr>";
                 }
@@ -112,6 +69,7 @@ $result = $conn->query($sql);
             <div id="modalBody"></div>
         </div>
     </div>
+    </div>
 
     <script>
         function viewDetails(employee) {
@@ -120,18 +78,18 @@ $result = $conn->query($sql);
 
             // Prepare the employee details
             const details = `
+              <p><strong>Profile Image:</strong></p>
+                <img src="${employee.profile_image}" width="100" height="100" alt="Profile Image">
                 <p><strong>First Name:</strong> ${employee.first_name}</p>
                 <p><strong>Middle Name:</strong> ${employee.middle_name}</p>
                 <p><strong>Last Name:</strong> ${employee.last_name}</p>
+                 <p><strong>Gender:</strong> ${employee.gender}</p>
                 <p><strong>Date of Birth:</strong> ${employee.dob}</p>
                 <p><strong>Phone Number:</strong> ${employee.phone_number}</p>
                 <p><strong>House Number:</strong> ${employee.house_number}</p>
                 <p><strong>Emergency Contact Name:</strong> ${employee.emergency_contact_name}</p>
                 <p><strong>Emergency Contact Number:</strong> ${employee.emergency_contact_number}</p>
                 <p><strong>Emergency Relationship:</strong> ${employee.emergency_relationship}</p>
-                <p><strong>Gender:</strong> ${employee.gender}</p>
-                <p><strong>Profile Image:</strong></p>
-                <img src="${employee.profile_image}" width="100" height="100" alt="Profile Image">
             `;
 
             // Set the modal body content
